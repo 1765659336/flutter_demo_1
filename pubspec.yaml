@@ -39,6 +39,8 @@ dependencies:
   flutter_swiper_view: ^1.1.8
   # 屏幕适配
   flutter_screenutil: ^5.9.3
+  # 日志
+  logger: ^2.3.0
 
 dev_dependencies:
   flutter_test:
