@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_demo_1/pages/web_view_page.dart';
+import 'package:flutter_demo_1/route/routes.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_swiper_view/flutter_swiper_view.dart';
 import 'package:logger/logger.dart';
@@ -62,9 +62,13 @@ class _HomePageState extends State<HomePage> {
     return InkWell(
         onTap: () {
           logger.d('点击了第 $index 项');
-          Navigator.push(context, MaterialPageRoute(builder: (context) {
-            return WebViewPage(title: '第${index + 1}条数据标题');
-          }));
+          // 隐式路由切换
+          Navigator.pushNamed(context, RoutePath.webViewPage,
+              arguments: {'title': '第${index + 1}条数据标题'});
+          // 动态路由切换
+          // Navigator.push(context, MaterialPageRoute(builder: (context) {
+          //   return WebViewPage(title: '第${index + 1}条数据标题');
+          // }));
         },
         child: Container(
           padding: const EdgeInsets.fromLTRB(0, 15, 0, 15), // 设置内边距 左上右下
