@@ -1,10 +1,12 @@
 {
-    "cSpell.words": [
-        "autoplay",
-        "fullscreen",
-        "LTRB",
-        "screenutil",
-        "Snapshotting",
-        "Swiper"
-    ]
+  "cSpell.words": [
+    "autoplay",
+    "cupertino",
+    "fullscreen",
+    "LTRB",
+    "screenutil",
+    "Snapshotting",
+    "Swiper"
+  ],
+  "dart.flutterSdkPath": ".fvm/versions/3.22.2"
 }

@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_demo_1/datas/home_banner_data/datum.dart';
+import 'package:flutter_demo_1/pages/home_view_model.dart';
 import 'package:flutter_demo_1/route/routes.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_swiper_view/flutter_swiper_view.dart';
@@ -14,6 +16,19 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
+  List<HomeBannerDataDatum>? bannerData;
+  @override
+  void initState() {
+    super.initState();
+    initBannerData();
+  }
+
+  void initBannerData() async {
+    bannerData = await HomeViewModel.getBanner();
+    // 因为接口是异步来的数据，所以当数据来时，build已经执行了，需要手动触发页面更新
+    setState(() {});
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -21,29 +36,7 @@ class _HomePageState extends State<HomePage> {
       body: SafeArea(
           child: Column(
         children: [
-          // 轮播图
-          SizedBox(
-            width: double.infinity,
-            height: 150.h,
-            child: Swiper(
-                // 轮播数量
-                itemCount: 3,
-                // 是否自动轮播
-                autoplay: true,
-                // 切换控制器
-                control: const SwiperControl(),
-                // 指示器
-                indicatorLayout: PageIndicatorLayout.NONE,
-                pagination: const SwiperPagination(),
-                itemBuilder: (context, index) {
-                  return Container(
-                      width: double.infinity,
-                      height: 150.h,
-                      color: Colors.lightBlue,
-                      // all 上下左右
-                      margin: EdgeInsets.all(15.r));
-                }),
-          ),
+          _banner(),
           // Expanded填充页面剩余空间
           Expanded(
               child:
@@ -55,6 +48,30 @@ class _HomePageState extends State<HomePage> {
                       }))
         ],
       )),
+    );
+  }
+
+  Widget _banner() {
+    return // 轮播图
+        SizedBox(
+      width: double.infinity,
+      height: 150.h,
+      child: Swiper(
+          // 轮播数量
+          itemCount: bannerData?.length ?? 0,
+          // 是否自动轮播
+          autoplay: true,
+          // 切换控制器
+          control: const SwiperControl(),
+          // 指示器
+          indicatorLayout: PageIndicatorLayout.NONE,
+          pagination: const SwiperPagination(),
+          itemBuilder: (context, index) {
+            return SizedBox(
+                width: double.infinity,
+                height: 150.h,
+                child: Image.network(bannerData?[index].imagePath ?? ''));
+          }),
     );
   }
 

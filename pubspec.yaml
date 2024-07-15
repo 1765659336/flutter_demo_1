@@ -41,6 +41,8 @@ dependencies:
   flutter_screenutil: ^5.9.3
   # 日志
   logger: ^2.3.0
+  # 网络请求
+  dio: ^5.5.0
 
 dev_dependencies:
   flutter_test:
