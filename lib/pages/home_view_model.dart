@@ -1,13 +1,16 @@
 import 'package:dio/dio.dart';
+import 'package:flutter/material.dart';
 import 'package:flutter_demo_1/datas/home_banner_data/datum.dart';
 import 'package:flutter_demo_1/datas/home_banner_data/home_banner_data.dart';
 import 'package:logger/logger.dart';
 
 final Logger logger = Logger();
 
-class HomeViewModel {
+class HomeViewModel with ChangeNotifier {
+  List<HomeBannerDataDatum>? bannerData;
+
   // 异步耗时操作使用Future
-  static Future<List<HomeBannerDataDatum>?> getBanner() async {
+  Future getBanner() async {
     Dio dio = Dio();
     dio.options = BaseOptions(
         method: 'GET',
@@ -20,6 +23,12 @@ class HomeViewModel {
         sendTimeout: const Duration(seconds: 30));
     Response response = await dio.get('banner/json');
     HomeBannerData homeBannerData = HomeBannerData.fromJson('$response');
-    return homeBannerData.data;
+    if (homeBannerData.data != null) {
+      bannerData = homeBannerData.data;
+    } else {
+      bannerData = [];
+    }
+    // 告诉provider值有变化
+    notifyListeners();
   }
 }

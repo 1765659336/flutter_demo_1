@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_demo_1/datas/home_banner_data/datum.dart';
 import 'package:flutter_demo_1/pages/home_view_model.dart';
 import 'package:flutter_demo_1/route/routes.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_swiper_view/flutter_swiper_view.dart';
 import 'package:logger/logger.dart';
+import 'package:provider/provider.dart';
 
 final Logger logger = Logger();
 
@@ -16,62 +16,67 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
-  List<HomeBannerDataDatum>? bannerData;
+  HomeViewModel homeViewModel = HomeViewModel();
+
   @override
   void initState() {
     super.initState();
-    initBannerData();
-  }
-
-  void initBannerData() async {
-    bannerData = await HomeViewModel.getBanner();
-    // 因为接口是异步来的数据，所以当数据来时，build已经执行了，需要手动触发页面更新
-    setState(() {});
+    // 触发provider仓库HomeViewModel的getBanner获取数据
+    homeViewModel.getBanner();
   }
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      // 开启顶部安全区
-      body: SafeArea(
-          child: Column(
-        children: [
-          _banner(),
-          // Expanded填充页面剩余空间
-          Expanded(
-              child:
-                  // 列表
-                  ListView.builder(
-                      itemCount: 100,
-                      itemBuilder: (context, index) {
-                        return _listViewItem(index);
-                      }))
-        ],
-      )),
-    );
+    // 使用ChangeNotifierProvider组件将数据往下传递
+    return ChangeNotifierProvider<HomeViewModel>(
+        create: (context) => homeViewModel,
+        child: Scaffold(
+          // 开启顶部安全区
+          body: SafeArea(
+              child: Column(
+            children: [
+              _banner(),
+              // Expanded填充页面剩余空间
+              Expanded(
+                  child:
+                      // 列表
+                      ListView.builder(
+                          itemCount: 100,
+                          itemBuilder: (context, index) {
+                            return _listViewItem(index);
+                          }))
+            ],
+          )),
+        ));
   }
 
+  // 轮播图
   Widget _banner() {
-    return // 轮播图
-        SizedBox(
-      width: double.infinity,
-      height: 150.h,
-      child: Swiper(
-          // 轮播数量
-          itemCount: bannerData?.length ?? 0,
-          // 是否自动轮播
-          autoplay: true,
-          // 切换控制器
-          control: const SwiperControl(),
-          // 指示器
-          indicatorLayout: PageIndicatorLayout.NONE,
-          pagination: const SwiperPagination(),
-          itemBuilder: (context, index) {
-            return SizedBox(
-                width: double.infinity,
-                height: 150.h,
-                child: Image.network(bannerData?[index].imagePath ?? ''));
-          }),
+    // 使用Consumer组件监听HomeViewModel中的数据变化
+    return Consumer<HomeViewModel>(
+      builder: (context, hvm, child) {
+        return SizedBox(
+          width: double.infinity,
+          height: 150.h,
+          child: Swiper(
+              // 轮播数量
+              itemCount: hvm.bannerData?.length ?? 0,
+              // 是否自动轮播
+              autoplay: true,
+              // 切换控制器
+              control: const SwiperControl(),
+              // 指示器
+              indicatorLayout: PageIndicatorLayout.NONE,
+              pagination: const SwiperPagination(),
+              itemBuilder: (context, index) {
+                return SizedBox(
+                    width: double.infinity,
+                    height: 150.h,
+                    child:
+                        Image.network(hvm.bannerData?[index].imagePath ?? ''));
+              }),
+        );
+      },
     );
   }
 
