@@ -1,6 +1,6 @@
 import 'dart:convert';
 
-import 'datum.dart';
+import 'home_banner_data_datum.dart';
 
 class HomeBannerData {
   List<HomeBannerDataDatum>? data;

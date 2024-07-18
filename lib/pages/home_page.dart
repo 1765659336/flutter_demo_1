@@ -21,8 +21,11 @@ class _HomePageState extends State<HomePage> {
   @override
   void initState() {
     super.initState();
+    // 初始化HomeViewModel配置
+    homeViewModel.initState();
     // 触发provider仓库HomeViewModel的getBanner获取数据
     homeViewModel.getBanner();
+    homeViewModel.getHomeList();
   }
 
   @override
@@ -37,14 +40,18 @@ class _HomePageState extends State<HomePage> {
             children: [
               _banner(),
               // Expanded填充页面剩余空间
-              Expanded(
-                  child:
-                      // 列表
-                      ListView.builder(
-                          itemCount: 100,
-                          itemBuilder: (context, index) {
-                            return _listViewItem(index);
-                          }))
+              Consumer<HomeViewModel>(
+                builder: (context, hvm, child) {
+                  return Expanded(
+                      child:
+                          // 列表
+                          ListView.builder(
+                              itemCount: hvm.homeArticle?.data.datas.length,
+                              itemBuilder: (context, index) {
+                                return _listViewItem(index);
+                              }));
+                },
+              )
             ],
           )),
         ));
@@ -94,15 +101,15 @@ class _HomePageState extends State<HomePage> {
         },
         child: Container(
           padding: const EdgeInsets.fromLTRB(0, 15, 0, 15), // 设置内边距 左上右下
-          child: const Column(children: [
+          child: Column(children: [
             Row(
               children: [
-                Text("#001"),
-                SizedBox(width: 8.0),
-                Text("[审核事务板块]事务审核页面卡片中字段对齐问题"),
+                Text('$index'),
+                const SizedBox(width: 8.0),
+                const Text("[审核事务板块]事务审核页面卡片中字段对齐问题"),
               ],
             ),
-            Row(
+            const Row(
               children: [
                 Text("功能"),
                 Text("高"),
@@ -111,7 +118,7 @@ class _HomePageState extends State<HomePage> {
                 Text("刘杰"),
               ],
             ),
-            Row(
+            const Row(
               children: [
                 Text("20240711版本"),
                 Text("2024-07-09"),
