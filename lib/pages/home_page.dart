@@ -21,8 +21,6 @@ class _HomePageState extends State<HomePage> {
   @override
   void initState() {
     super.initState();
-    // 初始化HomeViewModel配置
-    homeViewModel.initState();
     // 触发provider仓库HomeViewModel的getBanner获取数据
     homeViewModel.getBanner();
     homeViewModel.getHomeList();
@@ -46,7 +44,7 @@ class _HomePageState extends State<HomePage> {
                       child:
                           // 列表
                           ListView.builder(
-                              itemCount: hvm.homeArticle?.data.datas.length,
+                              itemCount: hvm.homeArticleDataDatasList?.length,
                               itemBuilder: (context, index) {
                                 return _listViewItem(index);
                               }));
@@ -67,7 +65,7 @@ class _HomePageState extends State<HomePage> {
           height: 150.h,
           child: Swiper(
               // 轮播数量
-              itemCount: hvm.bannerData?.length ?? 0,
+              itemCount: hvm.homeBannerDataList?.length ?? 0,
               // 是否自动轮播
               autoplay: true,
               // 切换控制器
@@ -79,8 +77,8 @@ class _HomePageState extends State<HomePage> {
                 return SizedBox(
                     width: double.infinity,
                     height: 150.h,
-                    child:
-                        Image.network(hvm.bannerData?[index].imagePath ?? ''));
+                    child: Image.network(
+                        hvm.homeBannerDataList?[index].imagePath ?? ''));
               }),
         );
       },

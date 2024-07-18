@@ -1,69 +1,61 @@
-import 'dart:convert';
-
-import 'home_banner_data_datum.dart';
-
 class HomeBannerData {
-  List<HomeBannerDataDatum>? data;
-  num? errorCode;
-  String? errorMsg;
+  String? desc;
+  num? id;
+  String? imagePath;
+  num? isVisible;
+  num? order;
+  String? title;
+  num? type;
+  String? url;
 
-  HomeBannerData({this.data, this.errorCode, this.errorMsg});
+  HomeBannerData({
+    this.desc,
+    this.id,
+    this.imagePath,
+    this.isVisible,
+    this.order,
+    this.title,
+    this.type,
+    this.url,
+  });
 
   @override
   String toString() {
-    return 'HomeBannerData(data: $data, errorCode: $errorCode, errorMsg: $errorMsg)';
+    return 'HomeBannerData(desc: $desc, id: $id, imagePath: $imagePath, isVisible: $isVisible, order: $order, title: $title, type: $type, url: $url)';
   }
 
-  factory HomeBannerData.fromDataDescId30ImagePathHttpsWwwWanandroidComBlogimgs42da12d8De564439B40cEab66c227a4bPngIsVisible1Order2TitleType0UrlHttpsWwwWanandroidComBlogShow3352DescId6ImagePathHttpsWwwWanandroidComBlogimgs62c1bd68B5f34a3cA6497ca8c7dfabe6PngIsVisible1Order1TitleTabType1UrlHttpsWwwWanandroidComNaviDescAppId10ImagePathHttpsWwwWanandroidComBlogimgs50c115c2Cf6c4802Aa7bA4334de444cdPngIsVisible1Order1TitleAppType1UrlHttpsWwwWanandroidComBlogShow2ErrorCode0ErrorMsg(
-      Map<String, dynamic> data) {
+  factory HomeBannerData.fromJson(dynamic json) {
     return HomeBannerData(
-      data: (data['data'] as List<dynamic>?)
-          ?.map((e) => HomeBannerDataDatum
-              .fromDataDescId30ImagePathHttpsWwwWanandroidComBlogimgs42da12d8De564439B40cEab66c227a4bPngIsVisible1Order2TitleType0UrlHttpsWwwWanandroidComBlogShow3352DescId6ImagePathHttpsWwwWanandroidComBlogimgs62c1bd68B5f34a3cA6497ca8c7dfabe6PngIsVisible1Order1TitleTabType1UrlHttpsWwwWanandroidComNaviDescAppId10ImagePathHttpsWwwWanandroidComBlogimgs50c115c2Cf6c4802Aa7bA4334de444cdPngIsVisible1Order1TitleAppType1UrlHttpsWwwWanandroidComBlogShow2ErrorCode0ErrorMsg(
-                  Map<String, dynamic>.from(e)))
-          .toList(),
-      errorCode: num.tryParse(data['errorCode'].toString()),
-      errorMsg: data['errorMsg']?.toString(),
+      desc: json['desc']?.toString(),
+      id: num.tryParse(json['id'].toString()),
+      imagePath: json['imagePath']?.toString(),
+      isVisible: num.tryParse(json['isVisible'].toString()),
+      order: num.tryParse(json['order'].toString()),
+      title: json['title']?.toString(),
+      type: num.tryParse(json['type'].toString()),
+      url: json['url']?.toString(),
     );
   }
 
-  Map<String, dynamic>
-      toDataDescId30ImagePathHttpsWwwWanandroidComBlogimgs42da12d8De564439B40cEab66c227a4bPngIsVisible1Order2TitleType0UrlHttpsWwwWanandroidComBlogShow3352DescId6ImagePathHttpsWwwWanandroidComBlogimgs62c1bd68B5f34a3cA6497ca8c7dfabe6PngIsVisible1Order1TitleTabType1UrlHttpsWwwWanandroidComNaviDescAppId10ImagePathHttpsWwwWanandroidComBlogimgs50c115c2Cf6c4802Aa7bA4334de444cdPngIsVisible1Order1TitleAppType1UrlHttpsWwwWanandroidComBlogShow2ErrorCode0ErrorMsg() {
-    return {
-      if (data != null)
-        'data': data
-            ?.map((e) => e
-                .toDataDescId30ImagePathHttpsWwwWanandroidComBlogimgs42da12d8De564439B40cEab66c227a4bPngIsVisible1Order2TitleType0UrlHttpsWwwWanandroidComBlogShow3352DescId6ImagePathHttpsWwwWanandroidComBlogimgs62c1bd68B5f34a3cA6497ca8c7dfabe6PngIsVisible1Order1TitleTabType1UrlHttpsWwwWanandroidComNaviDescAppId10ImagePathHttpsWwwWanandroidComBlogimgs50c115c2Cf6c4802Aa7bA4334de444cdPngIsVisible1Order1TitleAppType1UrlHttpsWwwWanandroidComBlogShow2ErrorCode0ErrorMsg())
-            .toList(),
-      if (errorCode != null) 'errorCode': errorCode,
-      if (errorMsg != null) 'errorMsg': errorMsg,
-    };
-  }
-
-  /// `dart:convert`
-  ///
-  /// Parses the string and returns the resulting Json object as [HomeBannerData].
-  factory HomeBannerData.fromJson(String data) {
-    return HomeBannerData
-        .fromDataDescId30ImagePathHttpsWwwWanandroidComBlogimgs42da12d8De564439B40cEab66c227a4bPngIsVisible1Order2TitleType0UrlHttpsWwwWanandroidComBlogShow3352DescId6ImagePathHttpsWwwWanandroidComBlogimgs62c1bd68B5f34a3cA6497ca8c7dfabe6PngIsVisible1Order1TitleTabType1UrlHttpsWwwWanandroidComNaviDescAppId10ImagePathHttpsWwwWanandroidComBlogimgs50c115c2Cf6c4802Aa7bA4334de444cdPngIsVisible1Order1TitleAppType1UrlHttpsWwwWanandroidComBlogShow2ErrorCode0ErrorMsg(
-            json.decode(data) as Map<String, dynamic>);
-  }
-
-  /// `dart:convert`
-  ///
-  /// Converts [HomeBannerData] to a JSON string.
-  String toJson() => json.encode(
-      toDataDescId30ImagePathHttpsWwwWanandroidComBlogimgs42da12d8De564439B40cEab66c227a4bPngIsVisible1Order2TitleType0UrlHttpsWwwWanandroidComBlogShow3352DescId6ImagePathHttpsWwwWanandroidComBlogimgs62c1bd68B5f34a3cA6497ca8c7dfabe6PngIsVisible1Order1TitleTabType1UrlHttpsWwwWanandroidComNaviDescAppId10ImagePathHttpsWwwWanandroidComBlogimgs50c115c2Cf6c4802Aa7bA4334de444cdPngIsVisible1Order1TitleAppType1UrlHttpsWwwWanandroidComBlogShow2ErrorCode0ErrorMsg());
-
   HomeBannerData copyWith({
-    List<HomeBannerDataDatum>? data,
-    num? errorCode,
-    String? errorMsg,
+    String? desc,
+    num? id,
+    String? imagePath,
+    num? isVisible,
+    num? order,
+    String? title,
+    num? type,
+    String? url,
   }) {
     return HomeBannerData(
-      data: data ?? this.data,
-      errorCode: errorCode ?? this.errorCode,
-      errorMsg: errorMsg ?? this.errorMsg,
+      desc: desc ?? this.desc,
+      id: id ?? this.id,
+      imagePath: imagePath ?? this.imagePath,
+      isVisible: isVisible ?? this.isVisible,
+      order: order ?? this.order,
+      title: title ?? this.title,
+      type: type ?? this.type,
+      url: url ?? this.url,
     );
   }
 }

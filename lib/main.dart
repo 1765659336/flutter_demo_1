@@ -1,8 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_demo_1/http/dio_instance.dart';
 import 'package:flutter_demo_1/route/routes.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 void main() {
+  // 初始化Dio
+  DioInstance.instance.initState(baseUrl: 'https://www.wanandroid.com/');
   runApp(const MyApp());
 }
 
