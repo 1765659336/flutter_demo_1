@@ -21,8 +21,10 @@ class MyApp extends StatelessWidget {
         builder: (context, child) {
           return MaterialApp(
               title: 'Flutter Demo',
+              // 设置主题样式
               theme: ThemeData(),
-              onGenerateRoute: Routes.generateRoute);
+              onGenerateRoute: Routes.generateRoute,
+              initialRoute: RoutePath.tab);
         });
   }
 }

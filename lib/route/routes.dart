@@ -1,6 +1,6 @@
 // 路由地址
 import 'package:flutter/material.dart';
-import 'package:flutter_demo_1/pages/home_page.dart';
+import 'package:flutter_demo_1/pages/tab_page.dart';
 import 'package:flutter_demo_1/pages/web_view_page.dart';
 import 'package:logger/logger.dart';
 
@@ -8,7 +8,7 @@ final Logger logger = Logger();
 
 class RoutePath {
   // 首页
-  static const String home = '/';
+  static const String tab = '/';
   // 网页页面
   static const String webViewPage = '/web_view_page';
 }
@@ -18,8 +18,8 @@ class Routes {
     final Map<String, dynamic>? arguments =
         settings.arguments as Map<String, dynamic>?;
     switch (settings.name) {
-      case RoutePath.home:
-        return pageRoute(const HomePage());
+      case RoutePath.tab:
+        return pageRoute(const TabPage());
       case RoutePath.webViewPage:
         final String title = arguments?['title'] ?? '';
         return pageRoute(WebViewPage(title: title));
