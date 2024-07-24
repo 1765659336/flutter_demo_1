@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_demo_1/pages/home_view_model.dart';
 import 'package:flutter_demo_1/route/routes.dart';
@@ -5,6 +7,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_swiper_view/flutter_swiper_view.dart';
 import 'package:logger/logger.dart';
 import 'package:provider/provider.dart';
+import 'package:pull_to_refresh/pull_to_refresh.dart';
 
 final Logger logger = Logger();
 
@@ -17,6 +20,8 @@ class HomePage extends StatefulWidget {
 
 class _HomePageState extends State<HomePage> {
   HomeViewModel homeViewModel = HomeViewModel();
+
+  RefreshController _refreshController = RefreshController();
 
   @override
   void initState() {
@@ -34,24 +39,53 @@ class _HomePageState extends State<HomePage> {
         child: Scaffold(
           // 开启顶部安全区
           body: SafeArea(
-              child: Column(
-            children: [
-              _banner(),
-              // Expanded填充页面剩余空间
-              Consumer<HomeViewModel>(
-                builder: (context, hvm, child) {
-                  return Expanded(
-                      child:
-                          // 列表
-                          ListView.builder(
-                              itemCount: hvm.homeArticleDataDatasList?.length,
-                              itemBuilder: (context, index) {
-                                return _listViewItem(index);
-                              }));
-                },
-              )
-            ],
-          )),
+              child: SmartRefresher(
+                  controller: _refreshController,
+                  // 开启下拉加载
+                  enablePullDown: true,
+                  // 开启上拉刷新
+                  enablePullUp: true,
+                  // 头部加载样式
+                  header: const ClassicHeader(),
+                  // 底部加载样式
+                  footer: const ClassicFooter(),
+                  // 上拉加载回调
+                  onLoading: () {
+                    // 定时器，模拟网络请求
+                    Timer(const Duration(milliseconds: 500), () {
+                      // 刷新完成
+                      _refreshController.loadComplete();
+                    });
+                  },
+                  // 下拉刷新回调
+                  onRefresh: () {
+                    // 定时器，模拟网络请求
+                    Timer(const Duration(milliseconds: 500), () {
+                      // 刷新完成
+                      _refreshController.refreshCompleted();
+                    });
+                  },
+                  child: Column(
+                    children: [
+                      _banner(),
+                      // Expanded填充页面剩余空间
+                      Consumer<HomeViewModel>(
+                        builder: (context, hvm, child) {
+                          return Expanded(
+                              child: AbsorbPointer(
+                                  // true表示吸收指针事件，false表示不吸收,禁用ListView的手势，从而生效SmartRefresher
+                                  absorbing: true,
+                                  // 列表
+                                  child: ListView.builder(
+                                      itemCount:
+                                          hvm.homeArticleDataDatasList?.length,
+                                      itemBuilder: (context, index) {
+                                        return _listViewItem(index);
+                                      })));
+                        },
+                      )
+                    ],
+                  ))),
         ));
   }
 
