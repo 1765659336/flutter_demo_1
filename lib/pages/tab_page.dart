@@ -1,5 +1,10 @@
+/* 
+  底部导航栏
+*/
+
 import 'package:flutter/material.dart';
 import 'package:flutter_demo_1/pages/home/home_page.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class TabPage extends StatefulWidget {
   const TabPage({super.key});
@@ -41,18 +46,45 @@ class _TabPageState extends State<TabPage> {
   }
 
   List<BottomNavigationBarItem> _barItemList() {
-    return const [
+    return [
       BottomNavigationBarItem(
-        icon: Icon(Icons.home),
-        label: 'Home',
+        icon: Image.asset(
+          'assets/images/home-line.png',
+          width: 24.h,
+          height: 24.h,
+        ),
+        activeIcon: Image.asset(
+          'assets/images/home-double.png',
+          width: 24.h,
+          height: 24.h,
+        ),
+        label: '首页',
       ),
       BottomNavigationBarItem(
-        icon: Icon(Icons.search),
-        label: 'Search',
+        icon: Image.asset(
+          'assets/images/etc-line.png',
+          width: 24.h,
+          height: 24.h,
+        ),
+        activeIcon: Image.asset(
+          'assets/images/etc-double.png',
+          width: 24.h,
+          height: 24.h,
+        ),
+        label: '功能',
       ),
       BottomNavigationBarItem(
-        icon: Icon(Icons.person),
-        label: 'Profile',
+        icon: Image.asset(
+          'assets/images/admin-line.png',
+          width: 24.h,
+          height: 24.h,
+        ),
+        activeIcon: Image.asset(
+          'assets/images/admin-double.png',
+          width: 24.h,
+          height: 24.h,
+        ),
+        label: '个人',
       )
     ];
   }
