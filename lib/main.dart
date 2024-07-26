@@ -22,9 +22,28 @@ class MyApp extends StatelessWidget {
           return MaterialApp(
               title: 'Flutter Demo',
               // 设置主题样式
-              theme: ThemeData(),
+              theme: ThemeData(
+                primarySwatch: Colors.yellow, // 这里设置主色调为黄色
+                primaryColor: const Color(0xFFFFCC00), // 应用中的主要颜色
+                buttonTheme: const ButtonThemeData(
+                  buttonColor: Color(0xFFFFCC00), // 按钮的背景颜色
+                  textTheme: ButtonTextTheme.primary, // 按钮文本颜色
+                ),
+                inputDecorationTheme: InputDecorationTheme(
+                  border: OutlineInputBorder(
+                    borderSide:
+                        const BorderSide(color: Color(0xFFFFCC00)), // 输入框边框颜色
+                    borderRadius: BorderRadius.circular(10),
+                  ),
+                  focusedBorder: OutlineInputBorder(
+                    borderSide: const BorderSide(
+                        color: Color(0xFFFFCC00), width: 2.0), // 聚焦时的边框颜色
+                    borderRadius: BorderRadius.circular(10),
+                  ),
+                ),
+              ),
               onGenerateRoute: Routes.generateRoute,
-              initialRoute: RoutePath.tab);
+              initialRoute: RoutePath.login);
         });
   }
 }

@@ -1,5 +1,6 @@
 // 路由地址
 import 'package:flutter/material.dart';
+import 'package:flutter_demo_1/pages/login/login_page.dart';
 import 'package:flutter_demo_1/pages/tab_page.dart';
 import 'package:flutter_demo_1/pages/web_view_page.dart';
 import 'package:logger/logger.dart';
@@ -7,8 +8,10 @@ import 'package:logger/logger.dart';
 final Logger logger = Logger();
 
 class RoutePath {
+  // 登录
+  static const String login = '/';
   // 系统页
-  static const String tab = '/';
+  static const String tab = '/tab';
   // 网页页面
   static const String webViewPage = '/web_view_page';
 }
@@ -17,7 +20,10 @@ class Routes {
   static Route<dynamic> generateRoute(RouteSettings settings) {
     final Map<String, dynamic>? arguments =
         settings.arguments as Map<String, dynamic>?;
+    logger.d('settings.name: ${settings.name}');
     switch (settings.name) {
+      case RoutePath.login:
+        return pageRoute(const LoginPage());
       case RoutePath.tab:
         return pageRoute(const TabPage());
       case RoutePath.webViewPage:

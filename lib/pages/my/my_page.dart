@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_demo_1/route/routes.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class MyPage extends StatefulWidget {
@@ -83,6 +84,10 @@ class _MyPageState extends State<MyPage> {
                             TextButton(
                               onPressed: () {
                                 Navigator.pop(context);
+                                Navigator.pushNamed(
+                                  context,
+                                  RoutePath.login,
+                                );
                               },
                               child: const Text('确定'),
                             ),

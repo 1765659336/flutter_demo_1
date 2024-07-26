@@ -1,7 +1,4 @@
-import 'dart:ffi';
-
 import 'package:flutter/material.dart';
-import 'package:flutter_demo_1/datas/hot_key/hot_key.dart';
 import 'package:flutter_demo_1/pages/hot_key/hot_key_view_model.dart';
 import 'package:flutter_demo_1/route/routes.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
