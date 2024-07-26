@@ -5,6 +5,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_demo_1/pages/home/home_page.dart';
 import 'package:flutter_demo_1/pages/hot_key/hot_key_page.dart';
+import 'package:flutter_demo_1/pages/my/my_page.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class TabPage extends StatefulWidget {
@@ -23,13 +24,13 @@ class _TabPageState extends State<TabPage> {
       body: SafeArea(
         child: IndexedStack(
           index: _currentIndex,
-          children: [
+          children: const [
             // Home Page
-            const HomePage(),
-            // Search Page
-            const HotKeyPage(),
-            // Profile Page
-            Container(color: Colors.blue),
+            HomePage(),
+            // HotKey Page
+            HotKeyPage(),
+            // My Page
+            MyPage(),
           ],
         ),
       ),
