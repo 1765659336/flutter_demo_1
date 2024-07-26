@@ -21,7 +21,7 @@ class HomePage extends StatefulWidget {
 class _HomePageState extends State<HomePage> {
   HomeViewModel homeViewModel = HomeViewModel();
 
-  RefreshController _refreshController = RefreshController();
+  final RefreshController _refreshController = RefreshController();
 
   @override
   void initState() {
@@ -37,55 +37,42 @@ class _HomePageState extends State<HomePage> {
     return ChangeNotifierProvider<HomeViewModel>(
         create: (context) => homeViewModel,
         child: Scaffold(
-          // 开启顶部安全区
-          body: SafeArea(
-              child: SmartRefresher(
-                  controller: _refreshController,
-                  // 开启下拉加载
-                  enablePullDown: true,
-                  // 开启上拉刷新
-                  enablePullUp: true,
-                  // 头部加载样式
-                  header: const ClassicHeader(),
-                  // 底部加载样式
-                  footer: const ClassicFooter(),
-                  // 上拉加载回调
-                  onLoading: () {
-                    // 定时器，模拟网络请求
-                    Timer(const Duration(milliseconds: 500), () {
-                      // 刷新完成
-                      _refreshController.loadComplete();
-                    });
-                  },
-                  // 下拉刷新回调
-                  onRefresh: () {
-                    // 定时器，模拟网络请求
-                    Timer(const Duration(milliseconds: 500), () {
-                      // 刷新完成
-                      _refreshController.refreshCompleted();
-                    });
-                  },
-                  child: Column(
-                    children: [
-                      _banner(),
-                      // Expanded填充页面剩余空间
-                      Consumer<HomeViewModel>(
-                        builder: (context, hvm, child) {
-                          return Expanded(
-                              child: AbsorbPointer(
-                                  // true表示吸收指针事件，false表示不吸收,禁用ListView的手势，从而生效SmartRefresher
-                                  absorbing: true,
-                                  // 列表
-                                  child: ListView.builder(
-                                      itemCount:
-                                          hvm.homeArticleDataDatasList?.length,
-                                      itemBuilder: (context, index) {
-                                        return _listViewItem(index);
-                                      })));
+          body: SmartRefresher(
+            controller: _refreshController,
+            enablePullDown: true,
+            enablePullUp: true,
+            header: const ClassicHeader(),
+            footer: const ClassicFooter(),
+            onLoading: () {
+              Timer(const Duration(milliseconds: 500), () {
+                _refreshController.loadComplete();
+              });
+            },
+            onRefresh: () {
+              Timer(const Duration(milliseconds: 500), () {
+                _refreshController.refreshCompleted();
+              });
+            },
+            child: CustomScrollView(
+              slivers: [
+                SliverToBoxAdapter(
+                  child: _banner(), // 放置非列表内容
+                ),
+                Consumer<HomeViewModel>(
+                  builder: (context, hvm, child) {
+                    return SliverList(
+                      delegate: SliverChildBuilderDelegate(
+                        (context, index) {
+                          return _listViewItem(index); // 列表内容
                         },
-                      )
-                    ],
-                  ))),
+                        childCount: hvm.homeArticleDataDatasList?.length ?? 0,
+                      ),
+                    );
+                  },
+                ),
+              ],
+            ),
+          ),
         ));
   }
 
@@ -138,7 +125,12 @@ class _HomePageState extends State<HomePage> {
               children: [
                 Text('$index'),
                 const SizedBox(width: 8.0),
-                const Text("[审核事务板块]事务审核页面卡片中字段对齐问题"),
+                const Flexible(
+                  child: Text(
+                    "[审核事务板块]事务审核页面卡片中字段对齐问题",
+                    overflow: TextOverflow.ellipsis,
+                  ),
+                )
               ],
             ),
             const Row(

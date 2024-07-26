@@ -4,6 +4,7 @@
 
 import 'package:flutter/material.dart';
 import 'package:flutter_demo_1/pages/home/home_page.dart';
+import 'package:flutter_demo_1/pages/hot_key/hot_key_page.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class TabPage extends StatefulWidget {
@@ -26,7 +27,7 @@ class _TabPageState extends State<TabPage> {
             // Home Page
             const HomePage(),
             // Search Page
-            Container(color: Colors.green),
+            const HotKeyPage(),
             // Profile Page
             Container(color: Colors.blue),
           ],
@@ -55,8 +56,8 @@ class _TabPageState extends State<TabPage> {
         ),
         activeIcon: Image.asset(
           'assets/images/home-double.png',
-          width: 24.h,
-          height: 24.h,
+          width: 28.h,
+          height: 28.h,
         ),
         label: '首页',
       ),
@@ -68,8 +69,8 @@ class _TabPageState extends State<TabPage> {
         ),
         activeIcon: Image.asset(
           'assets/images/etc-double.png',
-          width: 24.h,
-          height: 24.h,
+          width: 28.h,
+          height: 28.h,
         ),
         label: '功能',
       ),
@@ -81,8 +82,8 @@ class _TabPageState extends State<TabPage> {
         ),
         activeIcon: Image.asset(
           'assets/images/admin-double.png',
-          width: 24.h,
-          height: 24.h,
+          width: 28.h,
+          height: 28.h,
         ),
         label: '个人',
       )

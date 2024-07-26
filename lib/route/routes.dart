@@ -7,7 +7,7 @@ import 'package:logger/logger.dart';
 final Logger logger = Logger();
 
 class RoutePath {
-  // 首页
+  // 系统页
   static const String tab = '/';
   // 网页页面
   static const String webViewPage = '/web_view_page';
