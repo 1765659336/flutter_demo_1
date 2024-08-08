@@ -63,7 +63,7 @@ class _MyPageState extends State<MyPage> {
                     onTap: () {
                       Navigator.pushNamed(
                         context,
-                        RoutePath.login,
+                        RoutePath.tabBar,
                       );
                     },
                   ),

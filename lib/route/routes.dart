@@ -2,6 +2,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_demo_1/constants/global.dart';
 import 'package:flutter_demo_1/pages/login/login_page.dart';
+import 'package:flutter_demo_1/pages/tab_bar/tab_bar_page.dart';
 import 'package:flutter_demo_1/pages/tab_page.dart';
 import 'package:flutter_demo_1/pages/web_view_page.dart';
 import 'package:logger/logger.dart';
@@ -15,6 +16,8 @@ class RoutePath {
   static const String tab = '/tab';
   // 网页页面
   static const String webViewPage = '/web_view_page';
+  // tabTar示例页面
+  static const String tabBar = '/tab_bar';
 }
 
 class Routes {
@@ -38,6 +41,8 @@ class Routes {
       case RoutePath.webViewPage:
         final String title = arguments?['title'] ?? '';
         return pageRoute(WebViewPage(title: title));
+      case RoutePath.tabBar:
+        return pageRoute(const TabBarPage());
       default:
         return pageRoute(Scaffold(
           body: Center(child: Text('No route defined for ${settings.name}')),
