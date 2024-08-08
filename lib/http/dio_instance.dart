@@ -49,10 +49,10 @@ class DioInstance {
         responseType: responseType,
         contentType: contentType);
     // 添加拦截器，可以添加多个拦截器
-    // 打印拦截器
-    _dio.interceptors.add(PrintLogInterceptor());
     // 数据处理拦截器
     _dio.interceptors.add(ResponseInterceptor());
+    // 打印拦截器
+    _dio.interceptors.add(PrintLogInterceptor());
   }
 
   // 封装get请求

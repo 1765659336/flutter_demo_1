@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_demo_1/constants/global.dart';
 import 'package:flutter_demo_1/route/routes.dart';
 import 'package:logger/logger.dart';
 
@@ -39,6 +40,8 @@ class _LoginPageState extends State<LoginPage> {
         content: Text('欢迎$username'),
       ),
     );
+
+    globalToken = 'test token';
 
     Navigator.pushNamed(
       context,

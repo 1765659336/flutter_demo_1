@@ -1,10 +1,17 @@
 import 'package:dio/dio.dart';
+import 'package:flutter_demo_1/constants/global.dart';
 import 'package:flutter_demo_1/http/base_model.dart';
 import 'package:logger/logger.dart';
 
 Logger logger = Logger();
 
 class ResponseInterceptor extends InterceptorsWrapper {
+  @override
+  void onRequest(RequestOptions options, RequestInterceptorHandler handler) {
+    options.headers['Authorization'] = globalToken;
+    super.onRequest(options, handler);
+  }
+
   @override
   void onResponse(Response response, ResponseInterceptorHandler handler) {
     if (response.statusCode == 200) {
