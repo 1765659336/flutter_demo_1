@@ -1,5 +1,6 @@
 // 路由地址
 import 'package:flutter/material.dart';
+import 'package:flutter_demo_1/constants/global.dart';
 import 'package:flutter_demo_1/pages/login/login_page.dart';
 import 'package:flutter_demo_1/pages/tab_page.dart';
 import 'package:flutter_demo_1/pages/web_view_page.dart';
@@ -21,8 +22,16 @@ class Routes {
     final Map<String, dynamic>? arguments =
         settings.arguments as Map<String, dynamic>?;
     logger.d('settings.name: ${settings.name}');
+    // 如果没有登录，那么前往登录页
+    if (globalToken == null) {
+      return pageRoute(const LoginPage());
+    }
     switch (settings.name) {
       case RoutePath.login:
+        // 如果前往的是登录页，那么判断是否已经登录，如果已经登录，则跳转到系统页
+        if (globalToken != null) {
+          return pageRoute(const TabPage());
+        }
         return pageRoute(const LoginPage());
       case RoutePath.tab:
         return pageRoute(const TabPage());

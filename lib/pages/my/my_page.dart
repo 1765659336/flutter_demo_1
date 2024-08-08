@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_demo_1/constants/global.dart';
 import 'package:flutter_demo_1/route/routes.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
@@ -58,8 +59,13 @@ class _MyPageState extends State<MyPage> {
                   ListTile(
                     leading:
                         const Icon(Icons.switch_account, color: Colors.green),
-                    title: const Text('切换项目'),
-                    onTap: () {},
+                    title: const Text('tabBar/tabBarView'),
+                    onTap: () {
+                      Navigator.pushNamed(
+                        context,
+                        RoutePath.login,
+                      );
+                    },
                   ),
                   ListTile(
                     leading: const Icon(Icons.update, color: Colors.blue),
@@ -83,7 +89,7 @@ class _MyPageState extends State<MyPage> {
                             ),
                             TextButton(
                               onPressed: () {
-                                Navigator.pop(context);
+                                globalToken = null;
                                 Navigator.pushNamed(
                                   context,
                                   RoutePath.login,
