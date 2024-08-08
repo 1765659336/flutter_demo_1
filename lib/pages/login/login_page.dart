@@ -1,6 +1,9 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_demo_1/constants/global.dart';
 import 'package:flutter_demo_1/route/routes.dart';
+import 'package:flutter_demo_1/widges/system_loading.dart';
 import 'package:logger/logger.dart';
 
 Logger logger = Logger();
@@ -35,18 +38,21 @@ class _LoginPageState extends State<LoginPage> {
     logger.d('Username: $username');
     logger.d('Password: $password');
 
-    ScaffoldMessenger.of(context).showSnackBar(
-      SnackBar(
-        content: Text('欢迎$username'),
-      ),
-    );
+    SystemLoading.showLoading();
 
-    globalToken = 'test token';
-
-    Navigator.pushNamed(
-      context,
-      RoutePath.tab,
-    );
+    Timer(const Duration(seconds: 2), () {
+      SystemLoading.closeLoading();
+      globalToken = 'test token';
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(
+          content: Text('登录成功，欢迎$username'),
+        ),
+      );
+      Navigator.pushNamed(
+        context,
+        RoutePath.tab,
+      );
+    });
   }
 
   @override
