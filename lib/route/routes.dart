@@ -1,6 +1,7 @@
 // 路由地址
 import 'package:flutter/material.dart';
 import 'package:flutter_demo_1/constants/global.dart';
+import 'package:flutter_demo_1/pages/hot_key_search/hot_key_search_page.dart';
 import 'package:flutter_demo_1/pages/login/login_page.dart';
 import 'package:flutter_demo_1/pages/tab_bar/tab_bar_page.dart';
 import 'package:flutter_demo_1/pages/tab_page.dart';
@@ -18,6 +19,8 @@ class RoutePath {
   static const String webViewPage = '/web_view_page';
   // tabTar示例页面
   static const String tabBar = '/tab_bar';
+  // 搜索页
+  static const String hotKeySearch = 'hot_key_search';
 }
 
 class Routes {
@@ -43,6 +46,11 @@ class Routes {
         return pageRoute(WebViewPage(title: title));
       case RoutePath.tabBar:
         return pageRoute(const TabBarPage());
+      case RoutePath.hotKeySearch:
+        final String routeSearchText = arguments?['routeSearchText'] ?? '';
+        return pageRoute(HotKeySearchPage(
+          routeSearchText: routeSearchText,
+        ));
       default:
         return pageRoute(Scaffold(
           body: Center(child: Text('No route defined for ${settings.name}')),

@@ -93,18 +93,26 @@ class _HotKeyPageState extends State<HotKeyPage> {
               top: BorderSide(width: 0.5.r, color: Colors.grey),
               bottom: BorderSide(width: 0.5.r, color: Colors.grey))),
       padding: EdgeInsets.only(left: 12.w, right: 12.w, top: 5.h, bottom: 5.h),
-      child: Row(
-        children: [
-          Text(title, style: TextStyle(fontSize: 14.sp, color: Colors.black)),
-          const Expanded(
-            child: SizedBox(),
-          ),
-          Image.asset(
-            'assets/images/search-double.png',
-            width: 30.r,
-            height: 30.r,
-          )
-        ],
+      child: InkWell(
+        onTap: () {
+          Navigator.pushNamed(
+            context,
+            RoutePath.hotKeySearch,
+          );
+        },
+        child: Row(
+          children: [
+            Text(title, style: TextStyle(fontSize: 14.sp, color: Colors.black)),
+            const Expanded(
+              child: SizedBox(),
+            ),
+            Image.asset(
+              'assets/images/search-double.png',
+              width: 30.r,
+              height: 30.r,
+            )
+          ],
+        ),
       ),
     );
   }
@@ -113,8 +121,8 @@ class _HotKeyPageState extends State<HotKeyPage> {
     return GestureDetector(
       onTap: () {
         // 点击事件
-        Navigator.pushNamed(context, RoutePath.webViewPage,
-            arguments: {'title': title});
+        Navigator.pushNamed(context, RoutePath.hotKeySearch,
+            arguments: {'routeSearchText': title});
       },
       child: Container(
         padding: EdgeInsets.all(10.w),
