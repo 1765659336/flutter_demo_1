@@ -43,7 +43,8 @@ class Routes {
         return pageRoute(const TabPage());
       case RoutePath.webViewPage:
         final String title = arguments?['title'] ?? '';
-        return pageRoute(WebViewPage(title: title));
+        final String url = arguments?['url'] ?? '';
+        return pageRoute(WebViewPage(title: title, url: url));
       case RoutePath.tabBar:
         return pageRoute(const TabBarPage());
       case RoutePath.hotKeySearch:

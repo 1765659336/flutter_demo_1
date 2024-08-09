@@ -51,7 +51,8 @@ class _HotKeyPageState extends State<HotKeyPage> {
                       crossAxisSpacing: 10.w,
                     ),
                     itemBuilder: (context, index) {
-                      return _gridViewItem(hvm.hotKeyList?[index].name ?? '');
+                      return _gridSearchViewItem(
+                          hvm.hotKeyList?[index].name ?? '');
                     },
                     itemCount: hvm.hotKeyList?.length ?? 0,
                   ),
@@ -72,7 +73,8 @@ class _HotKeyPageState extends State<HotKeyPage> {
                     ),
                     itemBuilder: (context, index) {
                       return _gridViewItem(
-                          hvm.webPageDataList?[index].name ?? '');
+                          hvm.webPageDataList?[index].name ?? '',
+                          hvm.webPageDataList?[index].link ?? '');
                     },
                     itemCount: hvm.webPageDataList?.length ?? 0,
                   ),
@@ -117,7 +119,7 @@ class _HotKeyPageState extends State<HotKeyPage> {
     );
   }
 
-  Widget _gridViewItem(String title) {
+  Widget _gridSearchViewItem(String title) {
     return GestureDetector(
       onTap: () {
         // 点击事件
@@ -134,6 +136,29 @@ class _HotKeyPageState extends State<HotKeyPage> {
           child: Text(
             title,
             style: TextStyle(fontSize: 12.sp, color: Colors.black),
+          ),
+        ),
+      ),
+    );
+  }
+
+  Widget _gridViewItem(String title, String url) {
+    return GestureDetector(
+      onTap: () {
+        // 点击事件
+        Navigator.pushNamed(context, RoutePath.webViewPage,
+            arguments: {'title': title, 'url': url});
+      },
+      child: Container(
+        padding: EdgeInsets.all(10.w),
+        decoration: BoxDecoration(
+          color: Colors.grey[200],
+          borderRadius: BorderRadius.circular(10.r),
+        ),
+        child: Center(
+          child: Text(
+            title,
+            style: TextStyle(fontSize: 12.sp, color: Colors.blue),
           ),
         ),
       ),
