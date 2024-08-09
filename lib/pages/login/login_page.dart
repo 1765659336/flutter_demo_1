@@ -3,7 +3,7 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:flutter_demo_1/constants/global.dart';
 import 'package:flutter_demo_1/route/routes.dart';
-import 'package:flutter_demo_1/widges/system_loading.dart';
+import 'package:flutter_demo_1/widgets/system_loading.dart';
 import 'package:logger/logger.dart';
 
 Logger logger = Logger();

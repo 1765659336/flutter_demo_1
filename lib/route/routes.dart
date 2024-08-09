@@ -1,11 +1,12 @@
 // 路由地址
 import 'package:flutter/material.dart';
 import 'package:flutter_demo_1/constants/global.dart';
+import 'package:flutter_demo_1/pages/about/about_page.dart';
 import 'package:flutter_demo_1/pages/hot_key_search/hot_key_search_page.dart';
 import 'package:flutter_demo_1/pages/login/login_page.dart';
 import 'package:flutter_demo_1/pages/tab_bar/tab_bar_page.dart';
 import 'package:flutter_demo_1/pages/tab_page.dart';
-import 'package:flutter_demo_1/pages/web_view_page.dart';
+import 'package:flutter_demo_1/widgets/web_view_page.dart';
 import 'package:logger/logger.dart';
 
 final Logger logger = Logger();
@@ -21,6 +22,8 @@ class RoutePath {
   static const String tabBar = '/tab_bar';
   // 搜索页
   static const String hotKeySearch = 'hot_key_search';
+  // 关于
+  static const String about = '/about';
 }
 
 class Routes {
@@ -52,6 +55,8 @@ class Routes {
         return pageRoute(HotKeySearchPage(
           routeSearchText: routeSearchText,
         ));
+      case RoutePath.about:
+        return pageRoute(const AboutPage());
       default:
         return pageRoute(Scaffold(
           body: Center(child: Text('No route defined for ${settings.name}')),

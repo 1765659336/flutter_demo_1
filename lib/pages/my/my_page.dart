@@ -57,8 +57,7 @@ class _MyPageState extends State<MyPage> {
               child: ListView(
                 children: [
                   ListTile(
-                    leading:
-                        const Icon(Icons.switch_account, color: Colors.green),
+                    leading: const Icon(Icons.tab, color: Colors.green),
                     title: const Text('tabBar/tabBarView'),
                     onTap: () {
                       Navigator.pushNamed(
@@ -71,6 +70,16 @@ class _MyPageState extends State<MyPage> {
                     leading: const Icon(Icons.update, color: Colors.blue),
                     title: const Text('检测更新'),
                     onTap: () {},
+                  ),
+                  ListTile(
+                    leading: const Icon(Icons.info, color: Colors.blue),
+                    title: const Text('关于'),
+                    onTap: () {
+                      Navigator.pushNamed(
+                        context,
+                        RoutePath.about,
+                      );
+                    },
                   ),
                   ListTile(
                     leading: const Icon(Icons.logout, color: Colors.red),
